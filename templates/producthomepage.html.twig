@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block main %}
+    <div class="grid">
+        {% for product in products | slice(0,2)%}
+            <div class="cell">
+                <a href= {{ path('article_info', {'id': product.id}) }}>
+                    <h2>{{ product.title }}</h2>
+
+                    <img src="{{ product.image }}" alt="{{ product.title }}">
+                </a>
+                <div>{{ product.createdAt | date("m/d/Y") }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock main %}

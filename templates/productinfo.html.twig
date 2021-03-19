@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+{% block main %}
+<div class="info">
+    <img src="{{ product.image }}" alt="{{ product.title }}">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.createdAt | date("m/d/Y") }}</p>
+        <p>{{ product.content }}</p>
+</div>
+{% endblock main %}
