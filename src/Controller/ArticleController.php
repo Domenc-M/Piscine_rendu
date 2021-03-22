@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
 
-    //ACCUEIL AVEC 2 ARTICLES RECENTS ET PUBLIES
+    /////////////////////////////////////////ACCUEIL AVEC 2 ARTICLES RECENTS ET PUBLIES
     /**
      *  @Route("/homepage", name="article_homepage")
      */
@@ -30,7 +30,7 @@ class ArticleController extends AbstractController
         return $this->render('producthomepage.html.twig', ["title"=>"Accueil", "products"=>$article]);
         //render prend un tableau qui associe les cles twig a leur variable respective
     }
-    //LISTE DES ARTICLES
+    //////////////////////////////////LISTE DES ARTICLES
     /**
      *  @Route("/articles", name="articles_list")
      */
@@ -46,7 +46,7 @@ class ArticleController extends AbstractController
         return $this->render('products.html.twig', ["products"=>$articles]);
     }
 
-    //INFO SUR UN SEUL ARTICLE
+    //////////////////////////////////INFO SUR UN SEUL ARTICLE
     /**
      *  @Route("/article/{id}", name="article_info")
      */
@@ -58,6 +58,8 @@ class ArticleController extends AbstractController
         //render prend un tableau qui associe les cles twig a leur variable respective
     }
 
+
+    ////////////////////////////////////PAGE DE RECHERCHE
     /**
      *  @Route("/search/article", name="search_articles")
      */
