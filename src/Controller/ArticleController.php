@@ -9,6 +9,7 @@ namespace App\Controller;
 //On precise le namespace utilise par Route.
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,9 +21,11 @@ class ArticleController extends AbstractController
     /**
      *  @Route("/homepage", name="article_homepage")
      */
+    //Si on passe en parametre une classe de controller avec Symfony, c'est instancié pour nous : c'est l'auto-wire
     public function homePage(ArticleRepository $repo)
     {
-        $article = $repo->findBy(["isPublished"=>true], ["createdAt" => "DESC"]);
+        //On peut aussi écrire ->findByIsPublished(true);
+        $article = $repo->findBy(["isPublished"=>true], ["createdAt" => "DESC"], 2);
         //On retourne la page Produit avec l'id envoyée, et en utilisant le nom du produit comme titre.
         return $this->render('producthomepage.html.twig', ["title"=>"Accueil", "products"=>$article]);
         //render prend un tableau qui associe les cles twig a leur variable respective
@@ -40,7 +43,7 @@ class ArticleController extends AbstractController
 
         //Methode render de AbstractController pour retourner un fichier html
         //render prend un tableau qui associe les cles twig a leur variable respective
-        return $this->render('products.html.twig', ["title"=>$title, "products"=>$articles]);
+        return $this->render('products.html.twig', ["products"=>$articles]);
     }
 
     //INFO SUR UN SEUL ARTICLE
@@ -50,11 +53,22 @@ class ArticleController extends AbstractController
     public function articleInfo($id, ArticleRepository $repo)
     {
         $article = $repo->findOneBy(["id"=>$id]);
-        //$title = $article[0]->getTitle();
-        //dump($title);
-        //dump($article); die;
         //On retourne la page Produit avec l'id envoyée, et en utilisant le nom du produit comme titre.
-        return $this->render('productinfo.html.twig', ["title"=>$article->getTitle(), "product"=>$article]);
+        return $this->render('productinfo.html.twig', ["product"=>$article]);
+        //render prend un tableau qui associe les cles twig a leur variable respective
+    }
+
+    /**
+     *  @Route("/search/article", name="search_articles")
+     */
+    //Auto-wire du Request et du ArticleRepository
+    public function articleSearch(Request  $request, ArticleRepository $repo)
+    {
+        $search = $request->query->get("search");
+        //On récupère la recherche en URL et on la passe au modèle pour qu'il fasse la query.
+        $article = $repo->findByTerm($search);
+        //Une fois la réponse de la query obtenue, on la passe en paramètre à la page.
+        return $this->render('productsearch.html.twig', ["products"=>$article]);
         //render prend un tableau qui associe les cles twig a leur variable respective
     }
 

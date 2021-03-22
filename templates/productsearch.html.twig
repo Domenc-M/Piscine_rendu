@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{% block main %}
+<div class="grid">
+    {% if products | length > 0 %}
+        {% for product in products %}
+            <div class="cell">
+                <a href= {{ path('article_info', {'id': product.id}) }}>
+                <h2>{{ product.title }}</h2>
+
+            <img src="{{ product.image }}" alt="{{ product.title }}">
+                    </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div>Désolé, nous n'avons trouvé aucun produits.</div>
+    {% endif %}
+</div>
+{% endblock main %}
