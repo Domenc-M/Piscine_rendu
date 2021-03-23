@@ -2,13 +2,18 @@
 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin-left:200px;
 
 }
 
 .cell
 {
+    position:relative;
+    display:flex;
     text-align : center;
     margin-bottom: 50px;
+    width: 200px;
+    height: 200px;
 }
 
 .info
@@ -35,6 +40,7 @@
     text-align: center;
     background-color: #4eb024;
     height : 50px;
+    line-height: 50px;
 }
 
 .search-form-articles
@@ -43,14 +49,22 @@
     margin-left: 20px;
 }
 
-.maintitle
-{
-    text-align:center;
-}
-
 .errorMessage
 {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.deleteButton
+{
+    position:absolute;
+    background-color: #8c8c8c;
+    color:#FFFFFF;
+    height:20px;
+    width:50px;
+    border-radius:15%;
+    top:0;
+    right:0;
+    margin-top:5px;
 }

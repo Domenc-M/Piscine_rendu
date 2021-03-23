@@ -14,7 +14,19 @@ class ArticleController extends AbstractController
 {
 
     /**
-     * @Route("/admin/insertArticle", "insert_article")
+     *  @Route("/admin/articles", name="admin_articles_list")
+     */
+    public function articlesList(ArticleRepository $repo) : Response
+    {
+        $articles = $repo->findAll();
+
+        //Methode render de AbstractController pour retourner un fichier html
+        //render prend un tableau qui associe les cles twig a leur variable respective
+        return $this->render('adminproducts.html.twig', ["products"=>$articles]);
+    }
+
+    /**
+     * @Route("/admin/article/insert", name="article_insert")
      */
     //Auto-wire du entity manager
     public function InsertArticle(EntityManagerInterface $manager)
@@ -36,6 +48,52 @@ class ArticleController extends AbstractController
     $manager->flush();
 
     //Page de confirmation de l'opération
-    return $this->render('insert_success.html.twig', ["title"=>$article->getTitle()]);
+    return $this->render('error_message.html.twig', ["content"=>"l'article ".$article->getTitle()." a bien été ajouté"]);
+    }
+
+    /**
+     * @Route("/admin/article/update/{id}", name="article_update")
+     */
+    //Auto-wire du entity manager et du repository
+    public function UpdateArticle(EntityManagerInterface $manager, ArticleRepository $repo, $id)
+    {
+        //Nouvelle instance de l'entité à envoyer en base de donnée
+        $article= $repo->find($id);
+        if (is_null($article))
+        {
+            return $this->render('error_message.html.twig', ["content"=>"Aucun objet trouvé"]);
+        }
+
+        //Puisque les setters sont fluent, on peut enchainer les methodes.
+        $article->setContent("contenu encore plus recherché");
+
+        //Pas de persist puisque l'objet est deja enregistré (avec find)
+        $manager->flush();
+
+        //Page de confirmation de l'opération
+        return $this->render('error_message.html.twig', ["content"=>"L'article ".$article->getTitle()." a bien été modifié"]);
+    }
+
+    /**
+     * @Route("/admin/article/delete/{id}", name="article_delete")
+     */
+    //Auto-wire du entity manager et du repository
+    public function DeleteArticle( $id, EntityManagerInterface $manager, ArticleRepository $repo)
+    {
+        //Nouvelle instance de l'entité à envoyer en base de donnée
+        $article= $repo->find($id);
+        if (is_null($article))
+        {
+            return $this->render('error_message.html.twig', ["content"=>"Aucun objet trouvé"]);
+        }
+
+        //Puisque les setters sont fluent, on peut enchainer les methodes.
+        $manager->remove($article);
+
+        //Pas de persist puisque l'objet est deja enregistré (avec find)
+        $manager->flush();
+
+        //Page de confirmation de l'opération
+        return $this->render('error_message.html.twig', ["content"=>"L'article ".$article->getTitle()." a bien été supprimé"]);
     }
 }
