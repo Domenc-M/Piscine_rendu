@@ -87,13 +87,14 @@ class ArticleController extends AbstractController
             return $this->render('error_message.html.twig', ["content"=>"Aucun objet trouvé"]);
         }
 
-        //Puisque les setters sont fluent, on peut enchainer les methodes.
         $manager->remove($article);
 
         //Pas de persist puisque l'objet est deja enregistré (avec find)
         $manager->flush();
 
+        $this->addFlash("success", "l'article a bien été supprimé");
+
         //Page de confirmation de l'opération
-        return $this->render('error_message.html.twig', ["content"=>"L'article ".$article->getTitle()." a bien été supprimé"]);
+        return $this->redirectToRoute('admin_articles_list');
     }
 }

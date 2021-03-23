@@ -68,3 +68,13 @@
     right:0;
     margin-top:5px;
 }
+
+.success_message
+{
+    background-color: #4eb024;
+    color: #FFFFFF;
+    height: 20px;
+    width: 100%;
+    margin-top:10px;
+    text-align:center;
+}

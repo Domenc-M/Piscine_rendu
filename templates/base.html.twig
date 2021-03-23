@@ -2,6 +2,11 @@
 
 {%  include '_header.html.twig' %}
 <main>
+    {% for message in app.flashes("success") %}
+        <div class="success_message">
+            {{ message }}
+        </div>
+    {% endfor %}
     {% block main %}
 
     {% endblock %}
