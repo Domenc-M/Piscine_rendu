@@ -16,7 +16,9 @@ class CategoryController extends AbstractController
      */
     public function categoryList($categoryName, CategoryRepository $repo)
     {
-
+        //On récupère la wildcard et on la compare aux catégories.
+        //Si la wildcard n'est pas valide, on récupère tout.
+        //Si elle est valide, on récupère la catégorie associée.
         if ($categoryName == "neuf" OR $categoryName == "occasion")
         {
             $category = $repo->findBy(["title"=>$categoryName]);
@@ -25,6 +27,7 @@ class CategoryController extends AbstractController
         {
             $category = $repo->findAll();
         }
+        //On retourne une page qui loop toutes les catégories et les articles à l'intérieur.
         return $this->render('productscategory.html.twig', ["categories"=>$category]);
     }
 }

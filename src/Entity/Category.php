@@ -19,6 +19,10 @@ class Category
      */
     private $id;
 
+    //OneToMany car on a une catégorie pour plusieurs articles
+    //Le premier mot (One) représente l'entité dans laquelle on est, le deuximème (many) représente
+    //l'entité à laquelle on la lie
+    //mappedBy va de paire avec OneToMany, et représente la relation inverse de OneToMany
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */

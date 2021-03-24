@@ -44,6 +44,10 @@ class Article
     private $isPublished;
 
     //On indique quelle entité contiens la clé étrangère, et laquelle contient la relation inverse
+    //ManyToOne car on a plusieurs articles pour une seule catégorie
+    //Le premier mot (many) représente l'entité dans laquelle on est, le deuxième (one) représente
+    //l'entité à laquelle on la lie
+    //inversedBy va de paire avec ManyToOne, et représente la relation inverse de OneToMany
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
