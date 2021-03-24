@@ -16,4 +16,13 @@
     <a href= {{ path('article_homepage') }}>
         <div class="links">Accueil</div>
     </a>
+    <a href= {{ path('category_articles', {categoryName : "neuf"}) }}>
+        <div class="links">Neuf</div>
+    </a>
+    <a href= {{ path('category_articles', {categoryName : "occasion"}) }}>
+        <div class="links">Occasion</div>
+    </a>
+    <a href= {{ path('category_articles', {categoryName : "tout"}) }}>
+        <div class="links">Toutes</div>
+    </a>
 </div>

@@ -1,14 +1,15 @@
 {% extends "base.html.twig" %}
 {% block main %}
-<div class="grid">
-{% for product in products %}
-    <div class="cell">
-        <a href= {{ path('article_info', {'id': product.id}) }}>
-        <h2>{{ product.title }}</h2>
-
-    <img src="{{ product.image }}" alt="{{ product.title }}">
-            </a>
-    </div>
-{% endfor %}
-</div>
+    {% for category in categories %}
+        <h1 style="text-align:center">{{ category.title }}</h1>
+        <div class="grid">
+        {% for product in category.articles %}
+            <div class="cell">
+                <a href= {{ path('article_info', {'id': product.id}) }}>
+                <h2>{{ product.title }}</h2>
+                    </a>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock main %}

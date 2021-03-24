@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 
-use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,20 +12,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/articles/{category}", name="category_articles")
+     * @Route("/articles/{categoryName}", name="category_articles")
      */
-    public function categoryList($category, CategoryRepository $repo)
+    public function categoryList($categoryName, CategoryRepository $repo)
     {
 
-        if ($category == "neuf" OR $category == "occasion")
+        if ($categoryName == "neuf" OR $categoryName == "occasion")
         {
-            $article = $repo->findBy(["category"=>$category]);
-
+            $category = $repo->findBy(["title"=>$categoryName]);
         }
         else
         {
-            $article = $repo->findAll();
+            $category = $repo->findAll();
         }
-        return $this->render('productscategory.html.twig', ["products"=>$article]);
+        return $this->render('productscategory.html.twig', ["categories"=>$category]);
     }
 }
