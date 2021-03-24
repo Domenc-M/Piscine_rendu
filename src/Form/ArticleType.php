@@ -17,6 +17,7 @@ class ArticleType extends AbstractType
             ->add('content')
             ->add('image')
             ->add('createdAt')
+            ->add('isPublished')
             ->add('submit', SubmitType::class)
         ;
     }

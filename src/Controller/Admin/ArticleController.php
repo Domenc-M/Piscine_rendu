@@ -30,12 +30,28 @@ class ArticleController extends AbstractController
      * @Route("/admin/article/insert", name="article_insert")
      */
     //Auto-wire du entity manager
-    public function InsertArticle(EntityManagerInterface $manager)
+    public function InsertArticle(EntityManagerInterface $manager,
+                                  Request $request,
+                                  EntityManagerInterface $entityManager)
     {
         //Nouvelle instance de l'entité à envoyer en base de donnée
     $article= new Article();
 
     $articleForm = $this->createForm(ArticleType::class, $article);
+
+    //On demande au formulaire de traiter les inputs récupérés par Request
+    $articleForm->handleRequest($request);
+
+    //On vérifie si les inputs traités ont été confirmés et sont valide.
+    if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+        //Si c'est le cas, on stock ces inputs traités dans le nouvel objet
+        $article = $articleForm->getData();
+
+        //Ensuite, on stock l'article en base de donnée via entityManager
+        $entityManager->persist($article);
+        $entityManager->flush();
+    }
+
 
     //Page de confirmation de l'opération
     return $this->render('admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
