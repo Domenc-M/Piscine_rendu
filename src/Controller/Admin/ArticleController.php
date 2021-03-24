@@ -61,23 +61,32 @@ class ArticleController extends AbstractController
      * @Route("/admin/article/update/{id}", name="article_update")
      */
     //Auto-wire du entity manager et du repository
-    public function UpdateArticle(EntityManagerInterface $manager, ArticleRepository $repo, $id)
+    public function UpdateArticle(Request $request,
+                                  EntityManagerInterface $entityManager,
+                                  ArticleRepository $repo,
+                                  $id)
     {
         //Nouvelle instance de l'entité à envoyer en base de donnée
-        $article= $repo->find($id);
-        if (is_null($article))
-        {
-            return $this->render('error_message.html.twig', ["content"=>"Aucun objet trouvé"]);
+        $article = $repo->find($id);
+        if (is_null($article)) {
+            return $this->render('error_message.html.twig', ["content" => "Aucun objet trouvé"]);
         }
 
-        //Puisque les setters sont fluent, on peut enchainer les methodes.
-        $article->setContent("contenu encore plus recherché");
+        $articleForm = $this->createForm(ArticleType::class, $article);
 
-        //Pas de persist puisque l'objet est deja enregistré (avec find)
-        $manager->flush();
+        //On demande au formulaire de traiter les inputs récupérés par Request
+        $articleForm->handleRequest($request);
 
-        //Page de confirmation de l'opération
-        return $this->render('error_message.html.twig', ["content"=>"L'article ".$article->getTitle()." a bien été modifié"]);
+        //On vérifie si les inputs traités ont été confirmés et sont valide.
+        if ($articleForm->isSubmitted() && $articleForm->isValid()) {
+            //Si c'est le cas, on stock ces inputs traités dans le nouvel objet
+            $article = $articleForm->getData();
+
+            //Ensuite, on stock l'article en base de donnée via entityManager
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
+        return $this->render('admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
     }
 
     /**

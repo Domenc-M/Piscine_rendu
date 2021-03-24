@@ -1,10 +1,10 @@
 {% extends "base.html.twig" %}
 {% block main %}
 <div>
-    {{ form_start(categoryForm) }}
+    {{ form_start(articleForm) }}
 
     <div class="title-form-article">
-        {{ form_label(categoryform.title, 'Titre', {'label_attr': {'class': 'test'}}) }}
+        {{ form_label(articleForm.title, 'Titre', {'label_attr': {'class': 'test'}}) }}
         {{ form_widget(articleForm.title, {'attr': {'class': 'test'}}) }}
     </div>
 
