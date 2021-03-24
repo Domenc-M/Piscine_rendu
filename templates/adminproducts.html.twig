@@ -4,7 +4,10 @@
 {% for product in products %}
     <div class="cell">
         <a href= {{ path('article_info', {'id': product.id}) }}>
-        <h2>{{ product.title }}</h2>
+        <h1>{{ product.title }}</h1>
+            {%  if product.category %}
+            <h2>{{ product.category.title }}</h2>
+            {% endif %}
 
     <img src="{{ product.image }}" alt="{{ product.title }}">
             </a>

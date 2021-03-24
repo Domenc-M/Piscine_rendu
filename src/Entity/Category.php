@@ -18,6 +18,11 @@ class Category
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+    private $articles;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $title;

@@ -43,6 +43,12 @@ class Article
      */
     private $isPublished;
 
+    //On indique quelle entité contiens la clé étrangère, et laquelle contient la relation inverse
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,18 @@ class Article
     public function setIsPublished(bool $isPublished)
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
 
         return $this;
     }
