@@ -3,10 +3,12 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
 class Category
 {
@@ -41,6 +43,12 @@ class Category
      * @ORM\Column(type="boolean")
      */
     private $isPublished;
+
+    public function __construct()
+    {
+        $articles = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +99,36 @@ class Category
     public function setIsPublished(bool $isPublished)
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getCategory() === $this) {
+                $article->setCategory(null);
+            }
+        }
 
         return $this;
     }
