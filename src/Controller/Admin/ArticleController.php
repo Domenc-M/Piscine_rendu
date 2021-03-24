@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,21 +35,10 @@ class ArticleController extends AbstractController
         //Nouvelle instance de l'entité à envoyer en base de donnée
     $article= new Article();
 
-    //Puisque les setters sont fluent, on peut enchainer les methodes.
-    $article->setTitle("titre")
-        ->setContent("contenu très recherché")
-        ->setImage("")
-        ->setIsPublished(true)
-        ->setCreatedAt(new \DateTime("NOW"));
-
-    //Envoie de l'entité au manager
-    $manager->persist($article);
-
-    //Le manager envoie toutes les entités stockées en bdd
-    $manager->flush();
+    $articleForm = $this->createForm(ArticleType::class, $article);
 
     //Page de confirmation de l'opération
-    return $this->render('error_message.html.twig', ["content"=>"l'article ".$article->getTitle()." a bien été ajouté"]);
+    return $this->render('admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
     }
 
     /**
