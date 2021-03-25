@@ -4,7 +4,7 @@
 namespace App\Controller\Admin;
 
 
-use App\Entity\Article;
+use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
@@ -31,7 +31,7 @@ class CategoryController extends AbstractController
      * @Route("/admin/category/insert", name="category_insert")
      */
     //Auto-wire du entity manager
-    public function InsertArticle(EntityManagerInterface $manager,
+    public function InsertCategory(EntityManagerInterface $manager,
                                   Request $request,
                                   EntityManagerInterface $entityManager)
     {

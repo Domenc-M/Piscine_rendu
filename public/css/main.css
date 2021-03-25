@@ -30,7 +30,7 @@
 #header
 {
     display:flex;
-    background-color: #4eb024;
+    background-color: #65af37;
     height : 150px;
     line-height: 150px;
 }
@@ -38,7 +38,7 @@
 #footer
 {
     text-align: center;
-    background-color: #4eb024;
+    background-color: #65af37;
     height : 50px;
     line-height: 50px;
 }
@@ -77,4 +77,59 @@
     width: 100%;
     margin-top:10px;
     text-align:center;
+}
+
+/*
+/////////////////////////////////////////////BOUTONS//////////////////////////////////////////////
+ */
+
+.form-container
+{
+    box-sizing: border-box;
+    margin-top: 100px;
+    margin-left:30%;
+    margin-bottom: 100px;
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    background-color: #addb85;
+    border: 1px solid #65af37;
+    grid-gap: 50px;
+    vertical-align:middle;
+    border-radius:15px;
+
+}
+
+.form-label
+{
+    margin-left:50px;
+    line-height:40px;
+    text-align:right;
+
+}
+
+.form-field
+{
+    line-height:40px;
+}
+
+.submit-form-article
+{
+    text-align:right;
+    margin-bottom:20px;
+}
+
+.form-field-view
+{
+    background-color: #deffc8;
+    border: 1px solid #65af37;
+    border-radius:10px;
+}
+
+.submit-form-view
+{
+    background-color: #4eb024;
+    border: 1px solid #65af37;
+    border-radius:10px;
+    color:#FFFFFF;
 }

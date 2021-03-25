@@ -1,33 +1,45 @@
 {% extends "base.html.twig" %}
 {% block main %}
-<div>
-    {{ form_start(articleForm) }}
+    {{ form_start(articleForm, {'attr' : { 'class': 'form-container' }}) }}
 
-    <div class="title-form-article">
-        {{ form_label(articleForm.title, 'Titre', {'label_attr': {'class': 'test'}}) }}
-        {{ form_widget(articleForm.title, {'attr': {'class': 'test'}}) }}
+    <div class="form-label">
+        {{ form_label(articleForm.title, 'Titre : ', {'label_attr': {'class': 'test'}}) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(articleForm.title, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
-    <div class="content-form-article">
-        {{ form_label(articleForm.content, 'Contenu', {'label_attr': {'class': 'test'}}) }}
-        {{ form_widget(articleForm.content, {'attr': {'class': 'test'}}) }}
+    <div class="form-label">
+        {{ form_label(articleForm.content, 'Contenu : ', {'label_attr': {'class': 'test'}}) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(articleForm.content, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
-    <div class="image-form-article">
-        {{ form_label(articleForm.image, 'Image', {'label_attr': {'class': 'test'}}) }}
-        {{ form_widget(articleForm.image, {'attr': {'class': 'test'}}) }}
+    <div class="form-label">
+        {{ form_label(articleForm.image, "Adresse de l'image : ", {'label_attr': {'class': 'test'}}) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(articleForm.image, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
-    <div class="createdat-form-article">
-        {{ form_label(articleForm.createdAt, 'Date de création', {'label_attr': {'class': 'test'}}) }}
+    <div class="form-label">
+        {{ form_label(articleForm.createdAt, 'Date de création : ', {'label_attr': {'class': 'test'}}) }}
+    </div>
+    <div class="form-field">
         {{ form_widget(articleForm.createdAt, {'attr': {'class': 'test'}}) }}
     </div>
 
-    <div class="ispublished-form-article">
-        {{ form_label(articleForm.isPublished, 'Publiable', {'label_attr': {'class': 'test'}}) }}
+    <div class="form-label">
+        {{ form_label(articleForm.isPublished, 'Publiable : ', {'label_attr': {'class': 'test'}}) }}
+    </div>
+    <div class="form-field">
         {{ form_widget(articleForm.isPublished, {'attr': {'class': 'test'}}) }}
     </div>
 
+    <div class="submit-form-article">
+        {{ form_widget(articleForm.submit, {'attr': {'class': 'submit-form-view'}}) }}
+    </div>
+
     {{ form_end(articleForm) }}
-</div>
 {% endblock main %}
