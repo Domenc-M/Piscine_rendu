@@ -57,17 +57,19 @@ class ArticleController extends AbstractController
             //GESTION DU NOM D'IMAGE
             $originalFilename = pathinfo($articleImage->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
-
+            //Ajout d'un id unique au nom de l'image, et on y rajoute son extension.
             $newFilename = $safeFilename.'-'.uniqid().'.'.$articleImage->guessExtension();
-
+            //On tente de déplacer l'image dans un nouveau dossier, avec un message d'erreur si
+            //C'est impossible.
             try {
                 $articleImage->move(
                     $this->getParameter('images_directory'),
                     $newFilename
                 );
             } catch (FileException $e) {
-                $this->createNotFoundException("Oups ! L'image a eu des problèmes !");
+                throw $this->createNotFoundException("Oups ! L'image a eu des problèmes !");
             }
+            //On ajoute à l'entité le nouveau nom de l'image.
             $article->setImage($newFilename);
         }
         //Si c'est le cas, on stock ces inputs traités dans le nouvel objet
@@ -123,14 +125,14 @@ class ArticleController extends AbstractController
                 $safeFilename = $slugger->slug($originalFilename);
 
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$articleImage->guessExtension();
-
+                ///Try and catch pour déplacer le fichier et envoyer une erreur si impossible.
                 try {
                     $articleImage->move(
-                        $this->getParameter('brochures_directory'),
+                        $this->getParameter('images_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    $this->createNotFoundException("Oups ! L'image a eu des problèmes !");
+                    throw $this->createNotFoundException("Oups ! L'image a eu des problèmes !");
                 }
                 $article->setImage($newFilename);
             }
