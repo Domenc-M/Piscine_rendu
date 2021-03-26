@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,11 +21,20 @@ class Article
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="L'article doit être titulaire d'un titre attitré.")
+     * @Assert\Length(
+     *     max=100,
+     *     maxMessage="Le titre ne peut pas faire plus de 100 caractères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *     min=10,
+     *     max=600,
+     *     minMessage="Le contenu doit faire au moins 10 caractères",
+     *     maxMessage="Le contenu ne peut pas faire plus de 600 caractères")
      */
     private $content;
 

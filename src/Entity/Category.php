@@ -3,8 +3,10 @@
 
 namespace App\Entity;
 
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,11 +32,20 @@ class Category
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="La catégorie doit être titulaire d'un titre attitré")
+     * @Assert\Length(
+     *     max=100,
+     *     maxMessage="Le titre ne peut pas faire plus de 100 caractères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(
+     *     min=10,
+     *     max=600,
+     *     minMessage="La catégorie doit être expliquée un minimum",
+     *     maxMessage="La description ne peut pas faire plus de 600 caractères")
      */
     private $description;
 

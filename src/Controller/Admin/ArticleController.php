@@ -54,7 +54,7 @@ class ArticleController extends AbstractController
 
 
     //Page de confirmation de l'opération
-    return $this->render('admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
+    return $this->render('/admin/admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
     }
 
     /**
@@ -86,7 +86,7 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
         }
-        return $this->render('admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
+        return $this->render('/admin/admin_article_create.html.twig', ["articleForm"=>$articleForm->createView()]);
     }
 
     /**
