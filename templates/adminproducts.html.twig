@@ -8,8 +8,9 @@
             {%  if product.category %}
             <h2>{{ product.category.title }}</h2>
             {% endif %}
-
-    <img src="{{ product.image }}" alt="{{ product.title }}">
+            <div class="image-container">
+                <img src ="{{ asset('uploads/images/' ~ product.image) }}">
+            </div>
             </a>
         <a  href= {{ path('article_delete', {'id': product.id}) }} class="deleteButton">Delete</a>
     </div>

@@ -28,6 +28,9 @@
         {{ form_label(articleForm.image, "Adresse de l'image : ", {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(articleForm.image) }}
+        </div>
         {{ form_widget(articleForm.image, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
@@ -36,6 +39,9 @@
         {{ form_label(articleForm.createdAt, 'Date de création : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(articleForm.createdAt) }}
+        </div>
         {{ form_widget(articleForm.createdAt, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
@@ -44,6 +50,9 @@
         {{ form_label(articleForm.category, 'Catégorie : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(articleForm.category) }}
+        </div>
         {{ form_widget(articleForm.category, {'attr': {'class': 'form-field-view'}}) }}
     </div>
     {# ///////////////////////////////////IS PUBLISHED//////////////////////////////////////// #}
@@ -51,6 +60,9 @@
         {{ form_label(articleForm.isPublished, 'Publiable : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(articleForm.isPublished) }}
+        </div>
         {{ form_widget(articleForm.isPublished, {'attr': {'class': 'form-field-view'}}) }}
     </div>
     {# ///////////////////////////////////SUBMIT//////////////////////////////////////// #}
