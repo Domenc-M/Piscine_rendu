@@ -2,26 +2,44 @@
 {% block main %}
     {{ form_start(categoryForm, {'attr' : { 'class': 'form-container' }}) }}
 
+    {# ///////////////////////////////////TITLE//////////////////////////////////////// #}
     <div class="form-label">
         {{ form_label(categoryForm.title, 'Titre', {'label_attr': {'class': 'test'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(categoryForm.title) }}
+        </div>
         {{ form_widget(categoryForm.title, {'attr': {'class': 'form-field-view'}}) }}
     </div>
+
+    {# ///////////////////////////////////DESCRIPTION//////////////////////////////////////// #}
+
 
     <div class="form-label">
         {{ form_label(categoryForm.description, 'Description', {'label_attr': {'class': 'test'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(categoryForm.description) }}
+        </div>
         {{ form_widget(categoryForm.description, {'attr': {'class': 'form-field-view'}}) }}
     </div>
+
+    {# ///////////////////////////////////CREATED AT//////////////////////////////////////// #}
+
 
     <div class="form-label">
         {{ form_label(categoryForm.createdAt, 'Date de création', {'label_attr': {'class': 'test'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(categoryForm.createdAt) }}
+        </div>
         {{ form_widget(categoryForm.createdAt, {'attr': {'class': 'test'}}) }}
     </div>
+
+    {# ///////////////////////////////////IS PUBLISHED//////////////////////////////////////// #}
 
     <div class="form-label">
         {{ form_label(categoryForm.isPublished, 'Publiable', {'label_attr': {'class': 'test'}}) }}
@@ -29,6 +47,8 @@
     <div class="form-field">
         {{ form_widget(categoryForm.isPublished, {'attr': {'class': 'test'}}) }}
     </div>
+
+    {# ///////////////////////////////////SUBMIT//////////////////////////////////////// #}
 
     <div class="submit-form-article">
         {{ form_widget(categoryForm.submit, {'attr': {'class': 'test'}}) }}

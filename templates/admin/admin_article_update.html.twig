@@ -2,41 +2,58 @@
 {% block main %}
     {{ form_start(articleForm, {'attr' : { 'class': 'form-container' }}) }}
 
+    {# ///////////////////////////////////TITLE//////////////////////////////////////// #}
     <div class="form-label">
-        {{ form_label(articleForm.title, 'Titre : ', {'label_attr': {'class': 'test'}}) }}
+        {{ form_label(articleForm.title, 'Titre : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(articleForm.title) }}
+        </div>
         {{ form_widget(articleForm.title, {'attr': {'class': 'form-field-view'}}) }}
     </div>
-
+    {# ///////////////////////////////////CONTENT//////////////////////////////////////// #}
     <div class="form-label">
-        {{ form_label(articleForm.content, 'Contenu : ', {'label_attr': {'class': 'test'}}) }}
+        {{ form_label(articleForm.content, 'Contenu : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
+        <div class="form-error">
+            {{ form_errors(articleForm.content) }}
+        </div>
         {{ form_widget(articleForm.content, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
+    {# ///////////////////////////////////IMAGE//////////////////////////////////////// #}
     <div class="form-label">
-        {{ form_label(articleForm.image, "Adresse de l'image : ", {'label_attr': {'class': 'test'}}) }}
+        {{ form_label(articleForm.image, "Adresse de l'image : ", {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
         {{ form_widget(articleForm.image, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
+    {# ///////////////////////////////////CREATED AT//////////////////////////////////////// #}
     <div class="form-label">
-        {{ form_label(articleForm.createdAt, 'Date de création : ', {'label_attr': {'class': 'test'}}) }}
+        {{ form_label(articleForm.createdAt, 'Date de création : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
-        {{ form_widget(articleForm.createdAt, {'attr': {'class': 'test'}}) }}
+        {{ form_widget(articleForm.createdAt, {'attr': {'class': 'form-field-view'}}) }}
     </div>
 
+    {# ///////////////////////////////////CATEGORY//////////////////////////////////////// #}
     <div class="form-label">
-        {{ form_label(articleForm.isPublished, 'Publiable : ', {'label_attr': {'class': 'test'}}) }}
+        {{ form_label(articleForm.category, 'Catégorie : ', {'label_attr': {'class': 'label-text'}}) }}
     </div>
     <div class="form-field">
-        {{ form_widget(articleForm.isPublished, {'attr': {'class': 'test'}}) }}
+        {{ form_widget(articleForm.category, {'attr': {'class': 'form-field-view'}}) }}
     </div>
-
+    {# ///////////////////////////////////IS PUBLISHED//////////////////////////////////////// #}
+    <div class="form-label">
+        {{ form_label(articleForm.isPublished, 'Publiable : ', {'label_attr': {'class': 'label-text'}}) }}
+    </div>
+    <div class="form-field">
+        {{ form_widget(articleForm.isPublished, {'attr': {'class': 'form-field-view'}}) }}
+    </div>
+    {# ///////////////////////////////////SUBMIT//////////////////////////////////////// #}
     <div class="submit-form-article">
         {{ form_widget(articleForm.submit, {'attr': {'class': 'submit-form-view'}}) }}
     </div>

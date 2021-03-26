@@ -55,7 +55,7 @@ class CategoryController extends AbstractController
 
 
         //Page de confirmation de l'opération
-        return $this->render('admin_category_create.html.twig', ["categoryForm"=>$categoryForm->createView()]);
+        return $this->render('/admin/admin_category_create.html.twig', ["categoryForm"=>$categoryForm->createView()]);
     }
 
     /**
@@ -87,7 +87,7 @@ class CategoryController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
         }
-        return $this->render('admin_category_update.html.twig', ["categoryForm"=>$categoryForm->createView()]);
+        return $this->render('/admin/admin_category_update.html.twig', ["categoryForm"=>$categoryForm->createView()]);
     }
 
     /**
